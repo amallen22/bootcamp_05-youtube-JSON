@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Manipulate JSON youtube</title>
+</head>
+
+<body>
+    <div class="container"></div>
+    <button>Give me data</button>
+    <script src="https://code.jquery.com/jquery-2.0.3.min.js"></script>
+    <script type="text/javascript">
+	    $('button').on("click", function() {
+
+	        $.ajax({
+	                url: 'materials/youtube.json'
+	        })
+	        .then(function(youtubeData) {
+	            //console.log(youtubeData);
+
+	            var myTitle = youtubeData.data.items[0].title
+	            var myThumbnail = youtubeData.data.items["0"].thumbnail.hqDefault
+	        	var videoUrl = youtubeData.data.items["0"].player.default
+
+	        	var contentHtml = ''
+
+	        	contentHtml += '<h1>' + myTitle + '</h1>'
+	        	contentHtml += '<a href="' + videoUrl + '"><img src="' + myThumbnail + '" /></a>' 
+
+	        	$('.container').html(contentHtml)
+	        })
+	    })
+    </script>
+</body>
+
+</html>
